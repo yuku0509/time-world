@@ -3,37 +3,38 @@ import Image from 'next/image';
 
 export default function HeroSection() {
   return (
-    <section className="relative bg-white py-20 overflow-hidden min-h-[600px] lg:min-h-[700px] flex items-center">
-      
-      {/* 1. 【 View / Background Image 】 合成済みの1枚絵 (z-0) */}
+    // ★ポイント1: flex items-center を外し、上(pt)と下(pb)の余白を明示的に指定
+    // これによりテキストが上に寄り、下にはカードが被るための十分なスペース(pb-48)が確保されます
+    <section className="relative bg-[#0a0a0a] pt-16 pb-48 lg:pt-24 lg:pb-100 overflow-hidden min-h-[700px] lg:min-h-[1000px]">      
+      {/* 1. 【 View / Background Image 】 */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image 
           src="/images/hero_with_stadium.png"
           alt="スポーツビジネスEXPO メインビジュアル"
           fill 
-          // 画像を右寄りに表示し、余白をカバーします
-          className="object-cover object-center lg:object-right" 
+          // ★ポイント2: object-top に変更し、ランナーの頭（上部）が見切れないようにする
+          // lg:object-[80%_top] などでPC時の横方向の位置を微調整できます
+          className="object-cover object-top lg:object-[80%_top]" 
           sizes="100vw"
-          priority // ページの顔になる画像なので、優先的に読み込ませます（パフォーマンス向上）
+          priority 
         />
       </div>
 
-      {/* 2. 【 View / Mask Gradient 】 白のグラデーションフィルター (z-10) */}
-      {/* 左側の文字をくっきり読ませるため、白から透明になるグラデーションだけ重ねます */}
-      {/* <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" /> */}
+      {/* ★ポイント3: 【 Magic Blend 】 画像の下部を黒背景に自然にフェードアウトさせる */}
+      <div className="absolute inset-x-0 bottom-0 h-40 lg:h-56 bg-gradient-to-t from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
 
-      {/* 3. 【 Controller / Content Area 】 テキストと実績カードのエリア (z-20) */}
+      {/* 3. 【 Controller / Content Area 】 */}
       <div className="max-w-7xl mx-auto px-4 relative z-20 w-full">
-        <div className="max-w-3xl pt-10">
+        <div className="max-w-3xl">
           
           {/* メインコピー */}
-          <h1 className="text-5xl md:text-7xl font-black leading-tight mb-6 italic tracking-tighter">
+          <h1 className="text-5xl md:text-7xl font-black leading-tight mb-6 italic tracking-tighter drop-shadow-lg">
             <span className="text-gray-900">体育会の力が、</span><br />
-            <span className="text-red-600 text-6xl md:text-8xl">未来を創る。</span>
+            <span className="text-red-600 text-6xl md:text-8xl drop-shadow-xl">未来を創る。</span>
           </h1>
           
           {/* サブタイトル */}
-          <div className="inline-block bg-black text-white px-6 py-3 transform -skew-x-12 mb-12">
+          <div className="inline-block bg-black text-white px-6 py-3 transform -skew-x-12 mb-12 shadow-lg">
             <p className="text-sm md:text-base font-bold transform skew-x-12 tracking-wider">
               体育会系学生と企業をつなぐ、成果につながる採用イベント
             </p>

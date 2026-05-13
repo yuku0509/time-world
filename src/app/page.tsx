@@ -15,11 +15,22 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
-        {/* 作った部品をControllerとして並べるだけ！ */}
+      {/* 画像2枚目を見ると、Heroの下からFeaturesにかけて暗い背景が続いているため、
+        main全体、あるいは必要な部分を暗い背景（bg-blackやbg-[#111]）にするとより近づきます。
+      */}
+      <main className="bg-[#0a0a0a]">
         <HeroSection />
-        <TroubleSection />
-        <FeaturesSection />
+        
+        {/* ★ここがポイント: TroubleSectionを上に引き上げてHeroに重ねる */}
+        <div className="relative z-10 -mt-20 md:-mt-80">
+          <TroubleSection />
+        </div>
+
+        {/* TroubleSectionが上にずれた分、FeaturesSectionも自然と上に詰まって表示されます */}
+        <div className="pt-20 md:pt-10">
+          <FeaturesSection />
+        </div>
+        
         <AchievementSection />
         <SupportSection />
         <CompanyLogosSection />
@@ -37,7 +48,6 @@ export default function Home() {
           />
           <Button href="#apply" className="w-full md:w-80 h-16 text-xl">
             今すぐ出展を申し込む
-            {/* 右向きの矢印アイコン（SVG） */}
             <svg className="w-6 h-6 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
