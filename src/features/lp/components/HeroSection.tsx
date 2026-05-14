@@ -5,7 +5,7 @@ export default function HeroSection() {
   return (
     // ★ポイント1: flex items-center を外し、上(pt)と下(pb)の余白を明示的に指定
     // これによりテキストが上に寄り、下にはカードが被るための十分なスペース(pb-48)が確保されます
-    <section className="relative bg-[#0a0a0a] pt-16 pb-48 lg:pt-24 lg:pb-100 overflow-hidden min-h-[700px] lg:min-h-[1000px]">      
+    <section className="relative bg-[#0a0a0a] pt-16 pb-48 lg:pt-24 lg:pb-70 overflow-hidden min-h-[700px] lg:min-h-[1000px]">      
       {/* 1. 【 View / Background Image 】 */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image 
