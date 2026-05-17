@@ -9,6 +9,7 @@ import CompanyLogosSection from "@/features/lp/components/CompanyLogosSection";
 import TestimonialSection from "@/features/lp/components/TestimonialSection";
 import PricingSection from "@/features/lp/components/PricingSection";
 import Footer from "@/components/layouts/Footer";
+import ForStudentSection from "@/features/lp/components/ForStudentSection";
 
 export default function Home() {
   return (
@@ -29,7 +30,8 @@ export default function Home() {
         <div className="pt-20 md:pt-10">
           <FeaturesSection />
         </div>
-        
+
+        <ForStudentSection />
         <AchievementSection />
         <SupportSection />
         <CompanyLogosSection />
