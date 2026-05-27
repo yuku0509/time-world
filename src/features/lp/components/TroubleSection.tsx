@@ -1,3 +1,4 @@
+// src/components/layouts/TroubleSection.tsx
 import Image from 'next/image';
 
 export default function TroubleSection() {
@@ -9,12 +10,11 @@ export default function TroubleSection() {
   ];
 
   return (
-    <section className="w-full"> 
-      {/* ★ここを変更: max-w-5xl → max-w-6xl (さらに広くする場合は max-w-7xl) */}
+    <section className="w-full relative z-10"> 
       <div className="max-w-7xl mx-auto px-4">
         
+        {/* 白いカード部分（下部の黒い帯を削除しました） */}
         <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
-          
           <div className="grid grid-cols-1 md:grid-cols-12">
             
             <div className="md:col-span-4 bg-gray-200">
@@ -25,7 +25,6 @@ export default function TroubleSection() {
               />
             </div>
 
-            {/* テキスト側の余白も少し広げたい場合は p-8 md:p-14 などに調整するとバランスが良くなります */}
             <div className="md:col-span-8 p-8 md:p-14">
               <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-800">
                 こんな<span className="text-red-600">お悩み</span>ありませんか？
@@ -45,15 +44,25 @@ export default function TroubleSection() {
               </ul>
             </div>
           </div>
-
-          <div className="bg-[#1a1a1a] p-4 md:p-6 text-center border-t border-gray-700">
-            <p className="text-white text-lg md:text-xl font-bold flex items-center justify-center gap-2">
-              <span className="text-yellow-400 text-2xl">💡</span>
-              そのお悩み、<span className="text-yellow-400">体育会系採用イベント</span>がすべて解決します！
-            </p>
-          </div>
-
         </div>
+
+        {/* ★ここを変更: StudentTypeSectionへ繋ぐ赤いリボン */}
+        {/* -mt-6 で白いカードに少し重ねることで、一体感を出しています */}
+        <div className="flex justify-center -mt-6 relative z-20">
+          {/* drop-shadow を使うことで、四角形と三角形が合体した影を作ります */}
+          <div className="relative filter drop-shadow-xl">
+            
+            {/* 帯の本体 */}
+            <div className="bg-red-700 text-white font-bold text-lg md:text-2xl py-4 px-6 md:px-20 text-center rounded-sm">
+              その課題、体育会系採用イベントが解決します
+            </div>
+            
+            {/* 下向きの三角形（正方形を45度回転させて半分隠す） */}
+            <div className="absolute w-8 h-8 bg-red-700 rotate-45 -bottom-4 left-1/2 -translate-x-1/2 -z-10 rounded-sm"></div>
+            
+          </div>
+        </div>
+
       </div>
     </section>
   );
