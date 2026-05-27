@@ -1,7 +1,6 @@
 // features/lp/components/PricingSection.tsx
 import React from "react";
 
-// プランのデータを画像の内容に合わせて定義
 const plans = [
   {
     title: "スタンダードプラン",
@@ -43,7 +42,6 @@ const plans = [
   },
 ];
 
-// リスト用チェックマークアイコン
 const CheckIcon = ({ className }: { className: string }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={4}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -52,12 +50,14 @@ const CheckIcon = ({ className }: { className: string }) => (
 
 export default function PricingSection() {
   return (
-    <section className="py-24 bg-white text-center border-t border-gray-100">
+    // ★ 変更ポイント: 全体の背景を白から黒(#0a0a0a)へ変更し、ダークテーマ化
+    <section className="py-24 bg-[#0a0a0a] text-center border-t border-gray-900">
       <div className="max-w-[75rem] mx-auto px-4 lg:px-8">
         
         {/* タイトル部分 */}
         <div className="mb-16 flex justify-center items-center gap-6">
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-widest text-gray-900">
+          {/* 文字色を白に反転 */}
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-widest text-white drop-shadow-md">
             出展料金プラン
           </h2>
         </div>
@@ -71,11 +71,13 @@ export default function PricingSection() {
               className={`
                 relative flex flex-col rounded-xl overflow-hidden shadow-xl transition-all duration-300
                 ${plan.theme === "dark" 
-                  ? "bg-black border-[3px] border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.5)] transform md:scale-105 z-10" 
+                  // プレミアムプラン: 黒背景の中で埋もれないよう、わずかに赤いグラデーションを敷き、影（glow）を強くする
+                  ? "bg-gradient-to-b from-black to-red-950/40 border-[3px] border-red-600 shadow-[0_0_30px_rgba(220,38,38,0.5)] transform md:scale-105 z-10" 
+                  // スタンダード/カスタム: 黒背景に対して白を置くことで、パキッとしたコントラストを生む
                   : "bg-white border border-gray-200 mt-4 md:mt-0 z-0"}
               `}
             >
-              {/* おすすめリボン (プレミアムプランのみ) */}
+              {/* おすすめリボン */}
               {plan.isRecommended && (
                 <div className="absolute top-0 left-0 w-32 h-32 overflow-hidden z-20">
                   <div className="absolute top-6 -left-8 bg-red-600 text-white text-xs font-bold py-1.5 w-40 text-center -rotate-45 shadow-md">
@@ -85,7 +87,7 @@ export default function PricingSection() {
               )}
 
               {/* ヘッダー */}
-              <div className={`py-4 text-center font-bold text-lg tracking-wider ${plan.theme === "dark" ? "bg-black text-white border-b border-gray-800" : "bg-[#2a2a2a] text-white"}`}>
+              <div className={`py-4 text-center font-bold text-lg tracking-wider ${plan.theme === "dark" ? "bg-black/60 text-white border-b border-red-900/50" : "bg-[#1a1a1a] text-white"}`}>
                 {plan.title}
               </div>
 
@@ -106,7 +108,7 @@ export default function PricingSection() {
                       <span className={`text-xl font-bold ${plan.theme === "dark" ? "text-white" : "text-gray-900"}`}>
                         {plan.unit}
                       </span>
-                      <span className={`text-sm ml-1 ${plan.theme === "dark" ? "text-gray-400" : "text-gray-500"}`}>
+                      <span className={`text-sm ml-1 ${plan.theme === "dark" ? "text-red-200/60" : "text-gray-500"}`}>
                         {plan.taxInfo}
                       </span>
                     </div>
@@ -120,10 +122,10 @@ export default function PricingSection() {
                       {plan.desc}
                     </p>
                   ) : (
-                    <ul className="space-y-4 text-left">
+                    <ul className="space-y-4 text-left relative z-10">
                       {plan.features.map((feature, i) => (
                         <li key={i} className={`flex items-start gap-3 font-bold text-sm lg:text-base ${plan.theme === "dark" ? "text-white" : "text-gray-800"}`}>
-                           <CheckIcon className={`w-5 h-5 shrink-0 mt-0.5 ${plan.theme === "dark" ? "text-white" : "text-red-600"}`} />
+                           <CheckIcon className={`w-5 h-5 shrink-0 mt-0.5 ${plan.theme === "dark" ? "text-red-500" : "text-red-600"}`} />
                            <span>{feature}</span>
                         </li>
                       ))}
@@ -132,14 +134,14 @@ export default function PricingSection() {
                 </div>
 
                 {/* 右下の背景アイコン */}
-                <div className={`absolute bottom-4 right-4 ${plan.theme === "dark" ? "text-white opacity-80" : "text-gray-600 opacity-40"}`}>
+                <div className={`absolute bottom-4 right-4 z-0 ${plan.theme === "dark" ? "text-red-600/10" : "text-gray-200"}`}>
                   {plan.title === "スタンダードプラン" && (
-                    <svg className="w-14 h-14" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="w-16 h-16" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M17 11V3H7v4H3v14h18V11h-4zM7 19H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm4 8H9v-2h2v2zm0-4H9v-2h2v2zm0-4H9V9h2v2zm0-4H9V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm4 12h-2v-2h2v2zm0-4h-2v-2h2v2z"/>
                     </svg>
                   )}
                   {plan.title === "プレミアムプラン" && (
-                    <svg className="w-14 h-14" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="w-16 h-16" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
                     </svg>
                   )}
@@ -158,7 +160,7 @@ export default function PricingSection() {
 
         {/* 注記 */}
         <div className="text-left mt-6 ml-2">
-          <p className="text-gray-500 text-xs font-medium">※価格はすべて税抜です。</p>
+          <p className="text-gray-400 text-xs font-medium">※価格はすべて税抜です。</p>
         </div>
 
       </div>
