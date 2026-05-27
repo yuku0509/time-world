@@ -10,11 +10,17 @@ export default function TroubleSection() {
   ];
 
   return (
-    <section className="w-full relative z-10"> 
+    // 次のセクション（白背景）とピッタリくっつけるため、相対配置（relative）に設定
+    <section className="w-full relative z-20"> 
       <div className="max-w-7xl mx-auto px-4">
         
-        {/* 白いカード部分（下部の黒い帯を削除しました） */}
-        <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
+        {/* ★変更ポイント1: 
+          次のセクション（StudentTypeSection）とスムーズに地面で繋がるように、
+          カードの下部の角丸（rounded-b-none）と下の枠線（border-b-0）を削除しています。
+          影（shadow）も上方向にのみ広がるように調整し、下はスッキリさせています。
+        */}
+        <div className="bg-white rounded-t-xl shadow-[0_-15px_40px_rgba(0,0,0,0.15)] overflow-hidden border border-gray-200 border-b-0">
+          
           <div className="grid grid-cols-1 md:grid-cols-12">
             
             <div className="md:col-span-4 bg-gray-200">
@@ -44,26 +50,30 @@ export default function TroubleSection() {
               </ul>
             </div>
           </div>
-        </div>
 
-        {/* ★ここを変更: StudentTypeSectionへ繋ぐ赤いリボン */}
-        {/* -mt-6 で白いカードに少し重ねることで、一体感を出しています */}
-        <div className="flex justify-center -mt-6 relative z-20">
-          {/* drop-shadow を使うことで、四角形と三角形が合体した影を作ります */}
-          <div className="relative filter drop-shadow-xl">
-            
-            {/* 帯の本体 */}
-            <div className="bg-red-700 text-white font-bold text-lg md:text-2xl py-4 px-6 md:px-20 text-center rounded-sm">
-              その課題、体育会系採用イベントが解決します
-            </div>
-            
-            {/* 下向きの三角形（正方形を45度回転させて半分隠す） */}
-            <div className="absolute w-8 h-8 bg-red-700 rotate-45 -bottom-4 left-1/2 -translate-x-1/2 -z-10 rounded-sm"></div>
-            
-          </div>
         </div>
-
       </div>
+
+      {/* ★変更ポイント2: 
+        赤いリボンをセクションの一番下（bottom-0）に絶対配置（absolute）し、
+        Y軸方向に50%（translate-y-1/2）下にずらすことで、
+        2つのセクションの境界線上にピッタリ跨るように配置しています。
+      */}
+      <div className="absolute left-0 right-0 bottom-0 translate-y-1/2 flex justify-center z-30 pointer-events-none">
+        {/* pointer-events-none を親に付けつつ、リボン自体は auto にしてクリック等を阻害しないように配慮 */}
+        <div className="relative filter drop-shadow-xl pointer-events-auto">
+          
+          {/* 帯の本体 */}
+          <div className="bg-red-700 text-white font-bold text-lg md:text-2xl py-4 px-6 md:px-20 text-center rounded-sm">
+            その課題、体育会系採用イベントが解決します
+          </div>
+          
+          {/* 下向きの三角形（正方形を45度回転させて半分隠す） */}
+          <div className="absolute w-8 h-8 bg-red-700 rotate-45 -bottom-4 left-1/2 -translate-x-1/2 -z-10 rounded-sm"></div>
+          
+        </div>
+      </div>
+
     </section>
   );
 }
