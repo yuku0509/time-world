@@ -31,9 +31,12 @@ export default function Home() {
           <FeaturesSection />
         </div>
 
+        {/*
         <ForStudentSection />
         <AchievementSection />
         <SupportSection />
+        */}
+        
         <CompanyLogosSection />
         <TestimonialSection />
         <PricingSection />
