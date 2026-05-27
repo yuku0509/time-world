@@ -5,8 +5,17 @@ export default function Footer() {
   const copyRight = `© 2026 SPORTS BUSINESS EXPO All rights reserved.`;
 
   return (
-    // フッター全体: 上下の余白（pt/pb）を少し減らし、横長の帯（バナー）の印象を強める
-    <footer className="relative w-full bg-gradient-to-r from-red-800 via-red-600 to-red-900 text-white pt-10 pb-6 text-center shadow-[0_-10px_30px_rgba(200,0,0,0.3)]">
+    // ★修正ポイント: 背景色のグラデーションクラスを削除し、画像がはみ出さないように overflow-hidden を追加
+    <footer className="relative w-full text-white pt-10 pb-6 text-center shadow-[0_-10px_30px_rgba(200,0,0,0.3)] overflow-hidden">
+      
+      {/* ★追加: 背景画像。fillとobject-coverでフッター全体を覆い、-z-10で背面に配置 */}
+      <Image 
+        src="/images/footerBack.png" 
+        alt="Footer Background"
+        fill
+        className="object-cover -z-10"
+      />
+
       <div className="max-w-[90rem] mx-auto px-4 lg:px-8 flex flex-col items-center gap-8 relative z-10">
         
         {/* CTAコンテンツ */}
@@ -23,7 +32,7 @@ export default function Footer() {
               className="h-24 w-auto object-contain opacity-90"
             />
             
-            {/* 中央のテキスト（横長のレイアウトに合わせて行間を少し詰める） */}
+            {/* 中央のテキスト */}
             <div className="flex flex-col items-center justify-center text-center text-sm lg:text-base font-bold tracking-widest text-white leading-snug drop-shadow-md">
               <span>体育会系学生との</span>
               <span>出会いが、</span>
@@ -58,7 +67,7 @@ export default function Footer() {
         </a>
 
         {/* コピーライト */}
-        <div className="text-[10px] lg:text-xs opacity-60 text-center tracking-widest w-full border-t border-red-500/30 pt-4 mt-2">
+        <div className="text-[10px] lg:text-xs opacity-60 text-center tracking-widest w-full border-t border-white/30 pt-4 mt-2">
           {copyRight}
         </div>
       </div>

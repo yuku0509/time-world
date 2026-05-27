@@ -23,7 +23,7 @@ export default function Home() {
         <HeroSection />
         
         {/* ★ここがポイント: TroubleSectionを上に引き上げてHeroに重ねる */}
-        <div className="relative z-10 -mt-20 md:-mt-80">
+        <div className="relative z-10 -mt-20 md:-mt-50">
           <TroubleSection />
         </div>
 
